@@ -1,0 +1,37 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - GOOGLE_PLACES_API_KEY=${GOOGLE_PLACES_API_KEY}
+      - DATABASE_URL=sqlite:////app/data/geotrust.db
+    volumes:
+      - backend_data:/app/data  
+
+  frontend:
+    image: python:3.12-slim
+    working_dir: /site
+    volumes:
+      - ./frontend:/site
+    ports:
+      - "5500:5500"
+    command: python -m http.server 5500
+    depends_on:
+      - backend
+
+  analytics:
+    build:
+      context: .
+      dockerfile: analytics/Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      - GEOTRUST_DB_PATH=/app/data/geotrust.db
+    volumes:
+      - backend_data:/app/data 
+    depends_on:
+      - backend
+
+volumes:
+  backend_data:

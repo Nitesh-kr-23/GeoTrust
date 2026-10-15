@@ -1,0 +1,6 @@
+[tool.ruff.lint]
+# B008 (no function calls in argument defaults) is a general anti-pattern rule,
+# but Depends(...) as a default is FastAPI's documented, idiomatic dependency
+# injection pattern — flagging it here would just be noise.
+extend-select = ["I", "UP"]
+ignore = ["B008"]

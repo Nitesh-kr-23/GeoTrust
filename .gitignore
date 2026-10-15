@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.db
+.env
+.pytest_cache/
+.ruff_cache/
+*.joblib
+!backend/ml/trust_model.joblib
+!backend/ml/price_model.joblib
+!backend/ml/eta_model.joblib
+.DS_Store
