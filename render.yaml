@@ -6,7 +6,6 @@ services:
     dockerContext: ./backend
     plan: free 
     healthCheckPath: /api/health
-    preDeployCommand: "alembic upgrade head"
     envVars:
       - key: ENVIRONMENT
         value: production
